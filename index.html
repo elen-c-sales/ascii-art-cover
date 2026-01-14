@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elen Camila - Data Scientist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-main: #e8e8e8;
+            --text-dim: #666;
+            --text-gray: #999;
+            --prompt-purple: #d4a5e8;
+            --accent-blue: #58a6ff;
+            --accent-green: #4caf50;
+            --gemini-blue-start: #4d9dff;
+            --gemini-blue-mid: #7b9cff;
+            --gemini-purple-light: #a98cff;
+            --gemini-purple: #c77dff;
+            --gemini-pink: #e56cff;
+            --gemini-pink-end: #ff6bb5;
+            --border-color: #1a1a1a;
+            --code-bg: #0d0d0d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #050505 100%);
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace;
+            line-height: 1.6;
+        }
+
+        .cover {
+            width: 1000px;
+            height: 396px;
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace;
+            display: flex;
+            flex-direction: column;
+            padding: 28px 50px 70px 50px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg,
+                    rgba(0, 0, 0, 0.05),
+                    rgba(0, 0, 0, 0.05) 1px,
+                    transparent 1px,
+                    transparent 2px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cover .container {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cover .header-logo {
+            font-family: 'Fira Code', monospace;
+            font-size: 11px;
+            line-height: 1.1;
+            font-weight: 500;
+            background: linear-gradient(90deg,
+                    var(--gemini-blue-start) 0%,
+                    var(--gemini-blue-mid) 20%,
+                    var(--gemini-purple-light) 40%,
+                    var(--gemini-purple) 60%,
+                    var(--gemini-pink) 80%,
+                    var(--gemini-pink-end) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+            text-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .cover .tips {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            color: var(--text-dim);
+        }
+
+        .cover .tips-title {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .cover .tips-item {
+            color: var(--text-dim);
+        }
+
+        .cover .tips-command {
+            color: var(--prompt-purple);
+            font-weight: 500;
+        }
+
+        .cover .prompt-line {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: var(--text-gray);
+        }
+
+        .cover .prompt-symbol {
+            color: var(--prompt-purple);
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .cover .prompt-text {
+            color: var(--text-gray);
+            font-style: italic;
+        }
+
+        .cover .code-block {
+            border: 1px solid var(--border-color);
+            background: var(--code-bg);
+            border-radius: 6px;
+            padding: 12px 16px;
+            width: 92%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            margin-bottom: 0;
+        }
+
+        .cover .code-header {
+            font-size: 12px;
+            color: #6b6b6b;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cover .check-icon {
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .cover .code-label {
+            color: #e8e8e8;
+            font-weight: 600;
+        }
+
+        .cover .code-file {
+            color: #555;
+        }
+
+        .cover .code-content {
+            font-size: 15px;
+            line-height: 1.4;
+            display: flex;
+            gap: 8px;
+        }
+
+        .cover .line-number {
+            color: #404040;
+            user-select: none;
+            min-width: 16px;
+        }
+
+        .cover .keyword {
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+
+        .cover .string {
+            color: #ce9178;
+        }
+
+        .cover .paren {
+            color: #ffd700;
+        }
+
+        .cover .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+            margin-top: auto;
+            width: 92%;
+        }
+
+        .cover .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cover .footer-highlight {
+            color: var(--accent-blue);
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .cover .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: var(--accent-blue);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+
+        .portfolio {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .portfolio .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--code-bg);
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .portfolio .section h2 {
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .portfolio .section p, .portfolio .section ul {
+            margin-bottom: 15px;
+        }
+
+        .portfolio .section ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .portfolio .section li {
+            margin-bottom: 5px;
+        }
+
+        .portfolio .section li:before {
+            content: ">";
+            color: var(--prompt-purple);
+            margin-right: 10px;
+        }
+
+        .portfolio .links {
+            text-align: center;
+        }
+
+        .portfolio .links a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+
+        .portfolio .links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1400px) {
+            .cover {
+                width: 100%;
+                max-width: 1300px;
+                height: auto;
+                min-height: 396px;
+            }
+            .portfolio {
+                max-width: 100%;
+                padding: 20px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cover">
+        <div class="container">
+            <pre class="header-logo">  
+███        ███████ ██      ███████ ███    ██      ██████  █████  ███    ███ ██ ██       █████  
+  ███      ██      ██      ██      ████   ██     ██      ██   ██ ████  ████ ██ ██      ██   ██ 
+    ███    █████   ██      █████   ██ ██  ██     ██      ███████ ██ ████ ██ ██ ██      ███████ 
+  ███      ██      ██      ██      ██ ██  ██     ██   ██ ██   ██ ██  ██  ██ ██ ██      ██   ██
+███        ███████ ███████ ███████ ██   ████      ██████ ██   ██ ██      ██ ██ ███████ ██   ██</pre>
+
+            <div class="tips">
+                <div class="tips-title">Interests:</div>
+                <div class="tips-item">1. Data Science & Machine Learning</div>
+                <div class="tips-item">2. Business Intelligence & Analytics</div>
+                <div class="tips-item">3. Full-stack Development</div>
+            </div>
+
+            <div class="prompt-line">
+                <span class="prompt-symbol">></span>
+                <span class="prompt-text">python data_scientist.py --profile</span>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="check-icon">✓</span>
+                    <span class="code-label">Executing</span>
+                    <span class="code-file">profile.py</span>
+                </div>
+                <div class="code-content">
+                    <span class="line-number">></span>
+                    <div>
+                        <span class="keyword">Output:</span> <span class="string">Turning data into business value</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-item">Belém, PA • Brasil</div>
+                <div class="footer-item"><span style="color: var(--accent-blue);">elen-c-sales.github.io</span></div>
+                <div class="footer-item footer-highlight">+500 connections</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="portfolio">
+        <section class="section">
+            <h2>Sobre Mim</h2>
+            <p>Desenvolvedora e Analista de Dados com paixão por transformar informações em ferramentas inteligentes. Minha expertise abrange desde a análise profunda de dados (Python, R, SQL) e modelagem preditiva (Machine Learning com scikit-learn) até o desenvolvimento full-stack de soluções personalizadas. Crio não apenas dashboards (Power BI, Dash), mas também aplicações web completas (React, Flask), mobile (React Native) e desktop (Tkinter) que resolvem problemas específicos e otimizam processos. Meu objetivo é ir além dos relatórios, construindo produtos de dados escaláveis, intuitivos e que entreguem valor tangível.</p>
+        </section>
+
+        <section class="section">
+            <h2>Educação</h2>
+            <h3>Master of Business Administration - MBA, Gestão tecnológica Big Data e Inteligência Artificial</h3>
+            <p><strong>Instituição:</strong> UNAMA</p>
+            <p><strong>Período:</strong> nov de 2024 - jul de 2025</p>
+            <p><strong>Nota:</strong> 9</p>
+            <p><strong>Descrição:</strong> Curso voltado à aplicação de Big Data e Inteligência Artificial no contexto corporativo, com foco em soluções tecnológicas estratégicas. A formação proporciona domínio de análise estatística de dados, machine learning, engenharia de dados, computação em nuvem, bancos de dados, Design Thinking, metodologias ágeis e gestão de projetos. Promove uma visão interdisciplinar, conectando tecnologia, negócios e inovação.</p>
+            <ul>
+                <li>ANÁLISE ESTATÍSTICA DE DADOS</li>
+                <li>APRENDIZAGEM PROFUNDA</li>
+                <li>BANCO DE DADOS RELACIONAIS E NÃO RELACIONAIS</li>
+                <li>DESIGN THINKING</li>
+                <li>ENGENHARIA DE DADOS</li>
+                <li>ESTRUTURA DE DADOS</li>
+                <li>FUNDAMENTOS DATA SCIENCE</li>
+                <li>FUNDAMENTOS EM INTELIGÊNCIA ARTIFICIAL</li>
+                <li>GERENCIAMENTO DE PROJETOS</li>
+                <li>INTELIGÊNCIA ARTIFICIAL APLICADA AOS NEGÓCIOS</li>
+                <li>MACHINE LEARNING</li>
+                <li>METODOLOGIA DO ENSINO A DISTÂNCIA</li>
+            </ul>
+            <p><strong>Competências:</strong> Storytelling com dados, IA aplicada aos negócios e mais 3 competências</p>
+        </section>
+
+        <section class="section">
+            <h3>Curso Superior de Tecnologia (CST), Ciência de dados</h3>
+            <p><strong>Instituição:</strong> UNAMA</p>
+            <p><strong>Período:</strong> fev de 2023 - nov de 2024</p>
+            <p><strong>Nota:</strong> 9,26</p>
+            <p><strong>Descrição:</strong> Curso superior tecnológico com foco em ciência de dados aplicada à resolução de problemas do mundo real. A formação proporciona domínio de técnicas estatísticas, programação, inteligência artificial, bancos de dados e computação em nuvem. Desenvolvi habilidades em machine learning, análise de dados, visualização e tomada de decisões baseadas em evidências. A abordagem prática e interdisciplinar do curso permite aplicar conhecimentos em projetos inovadores, com uso de ferramentas modernas e metodologias ágeis. A formação também promoveu a integração com áreas como administração e empreendedorismo, ampliando a visão estratégica para atuação no mercado de tecnologia e dados.</p>
+            <ul>
+                <li>Machine Learning e Deep Learning</li>
+                <li>Análise de dados com R e Python</li>
+                <li>Banco de dados relacional e não relacional</li>
+                <li>Programação com Arduino (IoT)</li>
+                <li>Computação em nuvem e infraestrutura de dados</li>
+                <li>Projetos interdisciplinares de extensão</li>
+                <li>Gestão ágil de times e metodologias Scrum</li>
+                <li>Empreendedorismo e inovação tecnológica</li>
+                <li>Desenvolvimento sustentável e direitos digitais</li>
+                <li>Participação em laboratórios de projetos inovadores</li>
+                <li>Práticas com ferramentas da Microsoft e Escola do Trabalhador 4.0</li>
+            </ul>
+            <p><strong>Competências:</strong> Python, Gestão de produtos e mais 8 competências</p>
+        </section>
+
+        <section class="section links">
+            <h2>Links</h2>
+            <a href="https://www.linkedin.com/in/elen-camila-sales/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/elen-c-sales" target="_blank">GitHub</a>
+            <a href="https://elen-c-sales.github.io/" target="_blank">Site Pessoal</a>
+        </section>
+    </div>
+</body>
+
+</html>
