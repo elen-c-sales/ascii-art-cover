@@ -2,7 +2,7 @@
 
 # ASCII Art Cover for LinkedIn
 
-Este projeto cria uma capa personalizada para perfis do LinkedIn utilizando arte ASCII, inspirada em interfaces de terminal de código. A capa é renderizada como uma página web estática, otimizada para as dimensões padrão do LinkedIn (aproximadamente 1584x396 pixels), e pode ser hospedada no GitHub Pages para fácil acesso e compartilhamento.
+Este projeto cria uma capa personalizada para meu perfil do LinkedIn utilizando arte ASCII, inspirada em interfaces de terminal de código. A capa é renderizada como uma página web estática, otimizada para as dimensões padrão do LinkedIn (aproximadamente 1584x396 pixels).
 
 ## Funcionalidades
 
